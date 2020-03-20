@@ -23,9 +23,6 @@
       src="https://js.squareupsandbox.com/v2/paymentform"
     ></script>
 
-    <!-- link to the local custom styles for our original SqPaymentForm -->
-    <!-- <link rel="stylesheet" type="text/css" href="mysqpaymentform.css" /> -->
-
     <!-- link to the local custom styles for the single element SqPaymentForm -->
     <link
       rel="stylesheet"
@@ -36,26 +33,9 @@
   <body>
     Get ready for your first payment with Square!
     <p />
-    <!-- begin #form-container - Useful for when we want to map individual elements to the SqPaymentForm configuration inputTarget - https://developer.squareup.com/docs/api/paymentform#datatype-inputTargetobject -->
-    <!-- <div id="form-container">
-    <div id="sq-card-number"></div>
-    <div class="third" id="sq-expiration-date"></div>
-    <div class="third" id="sq-cvv"></div>
-    <div class="third" id="sq-postal-code"></div>
-    <button
-      id="sq-creditcard"
-      class="button-credit-card"
-      onclick="onGetCardNonce(event)"
-    >
-      Pay $1.00
-    </button>
-    -->
-    <!-- end #form-container -->
-
     <!-- begin single element payment form -->
     <div id="form-container">
       <div id="sq-card"></div>
-      <!-- This button will work for both forms -->
       <button
         id="sq-creditcard"
         class="button-credit-card"
@@ -77,39 +57,6 @@
         // Replace with your sandbox application ID
         applicationId: squareApplicationId,
         autoBuild: false,
-
-        // No longer necessary with the single element payment form
-        // inputClass: 'sq-input',
-        //
-        // Customize the CSS for SqPaymentForm iframe elements
-        // inputStyles: [
-        //   {
-        //     fontSize: '16px',
-        //     lineHeight: '24px',
-        //     padding: '16px',
-        //     placeholderColor: '#a0a0a0',
-        //     backgroundColor: 'transparent'
-        //   }
-        // ],
-
-        // For the single element payment form, we can replace these...
-        // // Initialize the credit card placeholders
-        // cardNumber: {
-        //   elementId: 'sq-card-number',
-        //   placeholder: 'Card Number'
-        // },
-        // cvv: {
-        //   elementId: 'sq-cvv',
-        //   placeholder: 'CVV'
-        // },
-        // expirationDate: {
-        //   elementId: 'sq-expiration-date',
-        //   placeholder: 'MM/YY'
-        // },
-        // postalCode: {
-        //   elementId: 'sq-postal-code',
-        //   placeholder: 'Postal'
-        // },
 
         // Using the card element is an alternative to building a payment form if you don't need the flexibility of individually placed payment card fields.
         // ...with
