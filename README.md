@@ -17,3 +17,7 @@ After notating comments in the server for step 2, here is a screenshot of being 
 Here is a screenshot of the JSON response:
 
 ![screenshots/screenshot-02.png](screenshots/screenshot-02.png)
+
+Logging into my Square Dashboard, I can see that the transactions I have processed so far have been successful:
+
+![screenshots/screenshot-03.png](screenshots/screenshot-03.png)
