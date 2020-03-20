@@ -9,3 +9,15 @@ The original project was based on the [walkthrough](https://developer.squareup.c
 After completing step 1 in its entirety, here is a screenshot of a successful nonce response being received by the browser:
 
 ![screenshots/screenshot-00.png](screenshots/screenshot-00.png)
+
+After notating comments in the server for step 2, here is a screenshot of being able to successfully process and capture a credit card payment:
+
+![screenshots/screenshot-01.png](screenshots/screenshot-01.png)
+
+Here is a screenshot of the JSON response:
+
+![screenshots/screenshot-02.png](screenshots/screenshot-02.png)
+
+Logging into my Square Dashboard, I can see that the transactions I have processed so far have been successful:
+
+![screenshots/screenshot-03.png](screenshots/screenshot-03.png)

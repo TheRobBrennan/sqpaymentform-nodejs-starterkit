@@ -44,10 +44,8 @@
     </div>
     <!-- end #form-container -->
     <script type="text/javascript">
-      // TODO: These should be environment variables, but are included for sandbox testing purposes only
+      // TODO: This should be an environment variable, but is included here for sandbox testing purposes only
       const squareApplicationId = 'sandbox-sq0idb-d4g6cbLifx6b29SUx7kF-Q'
-      const squareAccessToken =
-        'EAAAECmQSugvHJCComTzdF6WLXDdwx5fTP0xU2Y3EOf_C6v_KipIz1uBbo-oqRJf'
 
       // Create and initialize a payment form object
       const paymentForm = new SqPaymentForm({
@@ -102,14 +100,47 @@
               )
               return
             }
-            alert(`The generated nonce is:\n${nonce}`)
-            //TODO: Replace alert with code in step 2.1
+
+            // Let's replace the alert with code to actually send the nonce to the server
+            fetch('process-payment', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                nonce: nonce
+              })
+            })
+              .catch(err => {
+                alert('Network error: ' + err)
+              })
+              .then(response => {
+                if (!response.ok) {
+                  return response
+                    .text()
+                    .then(errorInfo => Promise.reject(errorInfo))
+                }
+                return response.text()
+              })
+              .then(data => {
+                console.log(data)
+                alert(
+                  'Payment completed successfully!'
+                )
+              })
+              .catch(err => {
+                console.error(err)
+                alert(
+                  'Payment failed to complete!\nCheck browser developer console for more details'
+                )
+              })
           }
         }
       })
 
       // Render the payment form on the page
-      paymentForm.build();
+      paymentForm.build()
 
       // Add a callback function to handle the pay button click event //
       // onGetCardNonce is triggered when the "Pay $1.00" button is clicked
