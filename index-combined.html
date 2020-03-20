@@ -1,0 +1,188 @@
+<!--
+  Copyright 2018 Square Inc.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+      link to the SqPaymentForm library
+
+      TODO: The sandbox is hard-coded here; refactor to an env var
+    -->
+    <script
+      type="text/javascript"
+      src="https://js.squareupsandbox.com/v2/paymentform"
+    ></script>
+
+    <!-- link to the local custom styles for our original SqPaymentForm -->
+    <!-- <link rel="stylesheet" type="text/css" href="mysqpaymentform.css" /> -->
+
+    <!-- link to the local custom styles for the single element SqPaymentForm -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="mysqpaymentform-single-element-payment-form.css"
+    />
+  </head>
+  <body>
+    Get ready for your first payment with Square!
+    <p />
+    <!-- begin #form-container - Useful for when we want to map individual elements to the SqPaymentForm configuration inputTarget - https://developer.squareup.com/docs/api/paymentform#datatype-inputTargetobject -->
+    <!-- <div id="form-container">
+    <div id="sq-card-number"></div>
+    <div class="third" id="sq-expiration-date"></div>
+    <div class="third" id="sq-cvv"></div>
+    <div class="third" id="sq-postal-code"></div>
+    <button
+      id="sq-creditcard"
+      class="button-credit-card"
+      onclick="onGetCardNonce(event)"
+    >
+      Pay $1.00
+    </button>
+    -->
+    <!-- end #form-container -->
+
+    <!-- begin single element payment form -->
+    <div id="form-container">
+      <div id="sq-card"></div>
+      <!-- This button will work for both forms -->
+      <button
+        id="sq-creditcard"
+        class="button-credit-card"
+        onclick="onGetCardNonce(event)"
+      >
+        Pay $1.00
+      </button>
+    </div>
+    <!-- end single element payment form -->
+
+    <script type="text/javascript">
+      // TODO: This should be an environment variable, but is included here for sandbox testing purposes only
+      const squareApplicationId = 'sandbox-sq0idb-CV83YZva5nqikQPdsnbnVQ'
+
+      // Create and initialize a payment form object
+      const paymentForm = new SqPaymentForm({
+        // Initialize the payment form elements
+
+        // Replace with your sandbox application ID
+        applicationId: squareApplicationId,
+        autoBuild: false,
+
+        // No longer necessary with the single element payment form
+        // inputClass: 'sq-input',
+        //
+        // Customize the CSS for SqPaymentForm iframe elements
+        // inputStyles: [
+        //   {
+        //     fontSize: '16px',
+        //     lineHeight: '24px',
+        //     padding: '16px',
+        //     placeholderColor: '#a0a0a0',
+        //     backgroundColor: 'transparent'
+        //   }
+        // ],
+
+        // For the single element payment form, we can replace these...
+        // // Initialize the credit card placeholders
+        // cardNumber: {
+        //   elementId: 'sq-card-number',
+        //   placeholder: 'Card Number'
+        // },
+        // cvv: {
+        //   elementId: 'sq-cvv',
+        //   placeholder: 'CVV'
+        // },
+        // expirationDate: {
+        //   elementId: 'sq-expiration-date',
+        //   placeholder: 'MM/YY'
+        // },
+        // postalCode: {
+        //   elementId: 'sq-postal-code',
+        //   placeholder: 'Postal'
+        // },
+
+        // Using the card element is an alternative to building a payment form if you don't need the flexibility of individually placed payment card fields.
+        // ...with
+        card: {
+          elementId: 'sq-card'
+        },
+
+        // SqPaymentForm callback functions
+        callbacks: {
+          /*
+           * callback function: cardNonceResponseReceived
+           * Triggered when: SqPaymentForm completes a card nonce request
+           */
+          cardNonceResponseReceived: function (errors, nonce, cardData) {
+            if (errors) {
+              // Log errors from nonce generation to the browser developer console.
+              console.error('Encountered errors:')
+              errors.forEach(function (error) {
+                console.error('  ' + error.message)
+              })
+              alert(
+                'Encountered errors, check browser developer console for more details'
+              )
+              return
+            }
+
+            // Let's replace the alert with code to actually send the nonce to the server
+            fetch('process-payment', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                nonce: nonce
+              })
+            })
+              .catch(err => {
+                alert('Network error: ' + err)
+              })
+              .then(response => {
+                if (!response.ok) {
+                  return response
+                    .text()
+                    .then(errorInfo => Promise.reject(errorInfo))
+                }
+                return response.text()
+              })
+              .then(data => {
+                console.log(data)
+                alert('Payment completed successfully!')
+              })
+              .catch(err => {
+                console.error(err)
+                alert(
+                  'Payment failed to complete!\nCheck browser developer console for more details'
+                )
+              })
+          }
+        }
+      })
+
+      // Render the payment form on the page
+      paymentForm.build()
+
+      // Add a callback function to handle the pay button click event //
+      // onGetCardNonce is triggered when the "Pay $1.00" button is clicked
+      function onGetCardNonce (event) {
+        // Don't submit the form until SqPaymentForm returns with a nonce
+        event.preventDefault()
+        // Request a nonce from the SqPaymentForm object
+        paymentForm.requestCardNonce()
+      }
+    </script>
+  </body>
+</html>
