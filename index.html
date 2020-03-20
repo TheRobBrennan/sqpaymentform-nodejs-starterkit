@@ -124,9 +124,9 @@
                 return response.text()
               })
               .then(data => {
-                console.log(JSON.stringify(data))
+                console.log(data)
                 alert(
-                  'Payment complete successfully!\nCheck browser developer console for more details'
+                  'Payment completed successfully!'
                 )
               })
               .catch(err => {
