@@ -23,18 +23,39 @@
       src="https://js.squareupsandbox.com/v2/paymentform"
     ></script>
 
-    <!-- link to the local custom styles for SqPaymentForm -->
-    <link rel="stylesheet" type="text/css" href="mysqpaymentform.css" />
+    <!-- link to the local custom styles for our original SqPaymentForm -->
+    <!-- <link rel="stylesheet" type="text/css" href="mysqpaymentform.css" /> -->
+
+    <!-- link to the local custom styles for the single element SqPaymentForm -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="mysqpaymentform-single-element-payment-form.css"
+    />
   </head>
   <body>
     Get ready for your first payment with Square!
     <p />
     <!-- begin #form-container - Useful for when we want to map individual elements to the SqPaymentForm configuration inputTarget - https://developer.squareup.com/docs/api/paymentform#datatype-inputTargetobject -->
     <!-- <div id="form-container">
-      <div id="sq-card-number"></div>
-      <div class="third" id="sq-expiration-date"></div>
-      <div class="third" id="sq-cvv"></div>
-      <div class="third" id="sq-postal-code"></div>
+    <div id="sq-card-number"></div>
+    <div class="third" id="sq-expiration-date"></div>
+    <div class="third" id="sq-cvv"></div>
+    <div class="third" id="sq-postal-code"></div>
+    <button
+      id="sq-creditcard"
+      class="button-credit-card"
+      onclick="onGetCardNonce(event)"
+    >
+      Pay $1.00
+    </button>
+    -->
+    <!-- end #form-container -->
+
+    <!-- begin single element payment form -->
+    <div id="form-container">
+      <div id="sq-card"></div>
+      <!-- This button will work for both forms -->
       <button
         id="sq-creditcard"
         class="button-credit-card"
@@ -42,12 +63,6 @@
       >
         Pay $1.00
       </button>
-    </div> -->
-    <!-- end #form-container -->
-
-    <!-- begin single element payment form -->
-    <div id="form-container">
-      <div id="sq-card"></div>
     </div>
     <!-- end single element payment form -->
 
