@@ -61,18 +61,22 @@
 
         // Replace with your sandbox application ID
         applicationId: squareApplicationId,
-        inputClass: 'sq-input',
         autoBuild: false,
+
+        // No longer necessary with the single element payment form
+        // inputClass: 'sq-input',
+        //
         // Customize the CSS for SqPaymentForm iframe elements
-        inputStyles: [
-          {
-            fontSize: '16px',
-            lineHeight: '24px',
-            padding: '16px',
-            placeholderColor: '#a0a0a0',
-            backgroundColor: 'transparent'
-          }
-        ],
+        // inputStyles: [
+        //   {
+        //     fontSize: '16px',
+        //     lineHeight: '24px',
+        //     padding: '16px',
+        //     placeholderColor: '#a0a0a0',
+        //     backgroundColor: 'transparent'
+        //   }
+        // ],
+
         // For the single element payment form, we can replace these...
         // // Initialize the credit card placeholders
         // cardNumber: {
