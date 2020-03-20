@@ -19,7 +19,8 @@ const app = express();
 const port = 3000;
 
 // Set the Access Token
-const accessToken = 'REPLACE_WITH_ACCESS_TOKEN';
+// TODO: This should be an environment variable, but is included here for sandbox testing purposes only
+const accessToken = 'EAAAECmQSugvHJCComTzdF6WLXDdwx5fTP0xU2Y3EOf_C6v_KipIz1uBbo-oqRJf';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
