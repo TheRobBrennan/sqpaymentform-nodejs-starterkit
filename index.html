@@ -102,14 +102,47 @@
               )
               return
             }
-            alert(`The generated nonce is:\n${nonce}`)
-            //TODO: Replace alert with code in step 2.1
+
+            // Let's replace the alert with code to actually send the nonce to the server
+            fetch('process-payment', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                nonce: nonce
+              })
+            })
+              .catch(err => {
+                alert('Network error: ' + err)
+              })
+              .then(response => {
+                if (!response.ok) {
+                  return response
+                    .text()
+                    .then(errorInfo => Promise.reject(errorInfo))
+                }
+                return response.text()
+              })
+              .then(data => {
+                console.log(JSON.stringify(data))
+                alert(
+                  'Payment complete successfully!\nCheck browser developer console for more details'
+                )
+              })
+              .catch(err => {
+                console.error(err)
+                alert(
+                  'Payment failed to complete!\nCheck browser developer console for more details'
+                )
+              })
           }
         }
       })
 
       // Render the payment form on the page
-      paymentForm.build();
+      paymentForm.build()
 
       // Add a callback function to handle the pay button click event //
       // onGetCardNonce is triggered when the "Pay $1.00" button is clicked
