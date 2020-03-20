@@ -29,7 +29,8 @@
   <body>
     Get ready for your first payment with Square!
     <p />
-    <div id="form-container">
+    <!-- begin #form-container - Useful for when we want to map individual elements to the SqPaymentForm configuration inputTarget - https://developer.squareup.com/docs/api/paymentform#datatype-inputTargetobject -->
+    <!-- <div id="form-container">
       <div id="sq-card-number"></div>
       <div class="third" id="sq-expiration-date"></div>
       <div class="third" id="sq-cvv"></div>
@@ -41,8 +42,15 @@
       >
         Pay $1.00
       </button>
-    </div>
+    </div> -->
     <!-- end #form-container -->
+
+    <!-- begin single element payment form -->
+    <div id="form-container">
+      <div id="sq-card"></div>
+    </div>
+    <!-- end single element payment form -->
+
     <script type="text/javascript">
       // TODO: This should be an environment variable, but is included here for sandbox testing purposes only
       const squareApplicationId = 'sandbox-sq0idb-d4g6cbLifx6b29SUx7kF-Q'
@@ -51,7 +59,7 @@
       const paymentForm = new SqPaymentForm({
         // Initialize the payment form elements
 
-        //TODO: Replace with your sandbox application ID
+        // Replace with your sandbox application ID
         applicationId: squareApplicationId,
         inputClass: 'sq-input',
         autoBuild: false,
@@ -65,23 +73,31 @@
             backgroundColor: 'transparent'
           }
         ],
-        // Initialize the credit card placeholders
-        cardNumber: {
-          elementId: 'sq-card-number',
-          placeholder: 'Card Number'
+        // For the single element payment form, we can replace these...
+        // // Initialize the credit card placeholders
+        // cardNumber: {
+        //   elementId: 'sq-card-number',
+        //   placeholder: 'Card Number'
+        // },
+        // cvv: {
+        //   elementId: 'sq-cvv',
+        //   placeholder: 'CVV'
+        // },
+        // expirationDate: {
+        //   elementId: 'sq-expiration-date',
+        //   placeholder: 'MM/YY'
+        // },
+        // postalCode: {
+        //   elementId: 'sq-postal-code',
+        //   placeholder: 'Postal'
+        // },
+
+        // Using the card element is an alternative to building a payment form if you don't need the flexibility of individually placed payment card fields.
+        // ...with
+        card: {
+          elementId: 'sq-card'
         },
-        cvv: {
-          elementId: 'sq-cvv',
-          placeholder: 'CVV'
-        },
-        expirationDate: {
-          elementId: 'sq-expiration-date',
-          placeholder: 'MM/YY'
-        },
-        postalCode: {
-          elementId: 'sq-postal-code',
-          placeholder: 'Postal'
-        },
+
         // SqPaymentForm callback functions
         callbacks: {
           /*
@@ -125,9 +141,7 @@
               })
               .then(data => {
                 console.log(data)
-                alert(
-                  'Payment completed successfully!'
-                )
+                alert('Payment completed successfully!')
               })
               .catch(err => {
                 console.error(err)
