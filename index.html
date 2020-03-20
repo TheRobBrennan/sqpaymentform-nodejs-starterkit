@@ -46,7 +46,8 @@
     <script type="text/javascript">
       // TODO: These should be environment variables, but are included for sandbox testing purposes only
       const squareApplicationId = 'sandbox-sq0idb-d4g6cbLifx6b29SUx7kF-Q'
-      const squareAccessToken = 'EAAAECmQSugvHJCComTzdF6WLXDdwx5fTP0xU2Y3EOf_C6v_KipIz1uBbo-oqRJf'
+      const squareAccessToken =
+        'EAAAECmQSugvHJCComTzdF6WLXDdwx5fTP0xU2Y3EOf_C6v_KipIz1uBbo-oqRJf'
 
       // Create and initialize a payment form object
       const paymentForm = new SqPaymentForm({
@@ -108,7 +109,16 @@
       })
 
       // Our payment form has been defined above //
-      //TODO: paste code from step 1.1.4
+
+      //TODO: paste code from step 1.1.5
+      // Add a callback function to handle the pay button click event //
+      // onGetCardNonce is triggered when the "Pay $1.00" button is clicked
+      function onGetCardNonce (event) {
+        // Don't submit the form until SqPaymentForm returns with a nonce
+        event.preventDefault()
+        // Request a nonce from the SqPaymentForm object
+        paymentForm.requestCardNonce()
+      }
     </script>
   </body>
 </html>
