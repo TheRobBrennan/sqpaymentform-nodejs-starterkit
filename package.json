@@ -12,5 +12,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheRobBrennan/sqpaymentform-nodejs-starterkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheRobBrennan/sqpaymentform-nodejs-starterkit/issues"
+  },
+  "homepage": "https://github.com/TheRobBrennan/sqpaymentform-nodejs-starterkit#readme"
 }
