@@ -21,3 +21,9 @@ Here is a screenshot of the JSON response:
 Logging into my Square Dashboard, I can see that the transactions I have processed so far have been successful:
 
 ![screenshots/screenshot-03.png](screenshots/screenshot-03.png)
+
+## Extra credit: The single element payment form
+
+Here it is...in all its glory:
+
+![screenshots/screenshot-04.png](screenshots/screenshot-04.png)
