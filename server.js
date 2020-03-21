@@ -21,7 +21,7 @@ const port = 3000
 // Set the Access Token
 // TODO: This should be an environment variable, but is included here for sandbox testing purposes only
 const accessToken =
-  'EAAAECmQSugvHJCComTzdF6WLXDdwx5fTP0xU2Y3EOf_C6v_KipIz1uBbo-oqRJf'
+  'EAAAEEa0Dk8xPzNZgGcGwZuVDYq2egKJn6Y0HBCzAi8KrZR4EVuqgpyUkExSd81k'
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
